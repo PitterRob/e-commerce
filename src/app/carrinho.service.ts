@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { AlartModalService } from "./shared/alart-modal.service";
-import { ItemCarrinho } from "./shared/item.carrinho.model";
-import { Oferta } from "./shared/oferta.model";
+import { Injectable } from '@angular/core';
+import { AlartModalService } from './shared/alart-modal.service';
+import { ItemCarrinho } from './shared/item.carrinho.model';
+import { Oferta } from './shared/oferta.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,30 +9,29 @@ class CarrinhoService {
   constructor(public alertService: AlartModalService) {
 
   }
-  public itens: ItemCarrinho[] = []
+  public itens: ItemCarrinho[] = [];
 
   public exibirItens(): ItemCarrinho[] {
-    return this.itens
+    return this.itens;
   }
   public exibirQTDItens() {
-    let total: number = 0
+    let total = 0;
     this.itens.map((item: ItemCarrinho) => {
       total += item.quantidade;
-    })
-    return total
+    });
+    return total;
   }
   public incluirItem(oferta: Oferta): void {
-    let itemCarrinho: ItemCarrinho = new ItemCarrinho(
+    const itemCarrinho: ItemCarrinho = new ItemCarrinho(
       oferta.id,
       oferta.imagens[0],
       oferta.titulo,
-      oferta.descricao_oferta,
+      oferta.descricaoOferta,
       oferta.valor,
       1
-    )
+    );
 
-    //verificar se o item em questão já não existe dentro de this.itens
-    let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id);
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.quantidade += 1;
       this.alertService.showAlertSuccessTimeOut('Item adicionado com sucesso', 1000);
@@ -44,15 +43,15 @@ class CarrinhoService {
 
   }
   public totalCarrinhoCompras(): number {
-    let total: number = 0
+    let total = 0;
     this.itens.map((item: ItemCarrinho) => {
-      total = total + (item.valor * item.quantidade)
-    })
-    return total
+      total = total + (item.valor * item.quantidade);
+    });
+    return total;
   }
   public adicionarQuantidade(itemCarrinho: ItemCarrinho): void {
-    //incrementar quantidade
-    let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id);
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.quantidade += 1;
     }
@@ -60,25 +59,25 @@ class CarrinhoService {
   }
 
   public diminuirQuantidade(itemCarrinho: ItemCarrinho): void {
-    let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id);
     if (itemCarrinhoEncontrado) {
-      itemCarrinhoEncontrado.quantidade -= 1
+      itemCarrinhoEncontrado.quantidade -= 1;
 
       if (itemCarrinhoEncontrado.quantidade === 0) {
-        this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1)
+        this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1);
       }
     }
   }
 
   public limparCarrinho(): void {
-    this.itens = []
+    this.itens = [];
   }
   public excluirItem(itemCarrinho: ItemCarrinho) {
-    let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id);
     if (itemCarrinhoEncontrado) {
-      this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1)
+      this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1);
     }
   }
 }
 
-export { CarrinhoService }
+export { CarrinhoService };
