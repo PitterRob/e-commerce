@@ -1,0 +1,5 @@
+<div class="alert alert-{{type}} no-margin" role="alert">
+  <button *ngIf="timeout == 0" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"
+      (click)="onClose()">&times;</span></button>
+  {{message}}
+</div>

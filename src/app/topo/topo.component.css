@@ -1,0 +1,19 @@
+.menu {
+    background: #343a40
+}
+
+.nav-link {
+    color: #FFFFFF
+}
+
+.nav-link:hover{
+    color: #FFF
+}
+
+.active {
+    color: #0894cc
+}
+.navbar {
+    background: white;
+}
+

@@ -1,0 +1,49 @@
+<div class="fixed-top">
+  <nav class="navbar navbar-light bg-faded">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <a class="navbar-brand" routerLink="/">
+            <img src="../../assets/logo.png" />
+          </a>
+        </div>
+        <!-- #termoDaPesquisa é uma variável sendo passada
+        como parâmetro para função pesquisa em keyup -->
+        <div class="col-sm-6">
+          <br>
+          <input type="text" class="form-control" placeholder="Pesquise por ofertas" #termoDaPesquisa
+            (keyup)="pesquisa(termoDaPesquisa.value)">
+
+          <ul class="list-group" style="position: absolute; z-index: 999">
+            <li class="list-group-item" *ngFor="let oferta of ofertas | async">
+              <a [routerLink]="['/oferta', oferta.id]" (click)="limpaPesquisa()">
+                {{oferta.titulo | uppercase}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <br>
+          <a a routerLink="/ordem-compra"><img src="../../assets/carrinho.png" /><span
+              *ngIf="carrinhoService.exibirQTDItens() > 0" class="badge bg-danger"
+              style="color: honeydew; margin: 3px;">{{carrinhoService.exibirQTDItens() }}</span></a>
+        </div>
+      </div>
+
+
+    </div>
+  </nav>
+
+  <div class="menu">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/restaurantes">Restaurantes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/diversao">Diversão</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
